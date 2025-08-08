@@ -22,8 +22,16 @@ togglePassword.addEventListener('click', () => {
  * BUTTON EVENT HANDLERS
  */
 // Encrypt button click handler
-document.getElementById('encryptBtn').addEventListener('click', () => {
-    alert('Encrypt clicked');
+document.getElementById('encryptBtn').addEventListener('click', async() => {
+    const password = passwordInput.value;
+    const mode = modeSelect.value;
+    const plaintext = editorBox.value;
+
+    const ciphertext = await encrypt(password, plaintext);
+
+    if(mode == "BASE64"){
+        editorBox.value = bytesToBase64(ciphertext);
+    }
 });
 
 // Decrypt button click handler
