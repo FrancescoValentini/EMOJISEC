@@ -1,0 +1,118 @@
+:root {
+    /* Color Variables */
+    --bg-color:             #121212;
+    --text-color:           #e0e0e0;
+    --heading-color:        #f5f5f5;
+    --card-bg:              #1c1c1c;
+    --input-bg:             #1e1e1e;
+    --border-color:         #444444;
+    --placeholder-color:    #aaaaaa;
+    --shadow-color:         rgba(0, 0, 0, 0.4);
+
+    /* Spacing Variables */
+    --base-padding:         2rem;
+    --mobile-padding:       3px;
+    --margin-bottom:        2rem;
+    --element-margin:       1rem;
+    --btn-margin:           0.5rem;
+
+    /* Sizing Variables */
+    --textarea-min-height:  400px;
+    --icon-size:            1.25rem;
+    --border-radius:        12px;
+    --shadow-blur:          10px;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: var(--base-padding);
+}
+
+/* Typography */
+h1 {
+    color: var(--heading-color);
+    margin-bottom: var(--margin-bottom);
+    text-align: center;
+}
+
+/* Form Elements */
+.form-control,
+.form-select,
+textarea {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.form-control::placeholder {
+    color: var(--placeholder-color);
+}
+
+/* Textarea Specific Styles */
+textarea {
+    resize: vertical !important;
+    min-height: var(--textarea-min-height) !important;
+}
+
+/* Button Styles */
+.btn-outline-success,
+.btn-outline-warning {
+    width: 100% !important;
+}
+
+.btn-group>.btn {
+    margin-right: var(--btn-margin);
+}
+
+/* Card Component */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: var(--element-margin);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 var(--shadow-blur) var(--shadow-color);
+}
+
+/* Form Layout */
+label {
+    margin-top: var(--element-margin);
+}
+
+/* Input Group Adjustments */
+.input-group-lg .btn {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.input-group-lg .btn i {
+    font-size: var(--icon-size);
+}
+
+/*
+    ============================
+    MEDIA QUERIES
+    ============================
+*/
+@media (max-width: 576px) {
+    /* Mobile container adjustments */
+    .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* Mobile card adjustments */
+    .card {
+        margin: 0 !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Mobile body padding */
+    body {
+        padding: var(--mobile-padding) !important;
+    }
+}
