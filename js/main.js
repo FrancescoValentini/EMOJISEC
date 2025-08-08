@@ -52,5 +52,7 @@ document.getElementById('decryptBtn').addEventListener('click', async() => {
 
 // Copy button click handler
 document.getElementById('copyBtn').addEventListener('click', () => {
-    alert('Copy clicked');
+    editorBox.select();
+    editorBox.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(editorBox.value);
 });
