@@ -32,11 +32,22 @@ document.getElementById('encryptBtn').addEventListener('click', async() => {
     if(mode == "BASE64"){
         editorBox.value = bytesToBase64(ciphertext);
     }
+    //TODO: implement EMOJI encoding
 });
 
 // Decrypt button click handler
-document.getElementById('decryptBtn').addEventListener('click', () => {
-    alert('Decrypt clicked');
+document.getElementById('decryptBtn').addEventListener('click', async() => {
+    const password = passwordInput.value;
+    const mode = modeSelect.value;
+    const encodedCiphertext = editorBox.value;
+    var ciphertext;
+
+    if(mode == "BASE64"){
+        ciphertext = base64ToBytes(encodedCiphertext);
+    }
+    //TODO: implement EMOJI encoding
+
+    editorBox.value = await decrypt(password,ciphertext);
 });
 
 // Copy button click handler
