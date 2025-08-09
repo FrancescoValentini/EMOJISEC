@@ -26,13 +26,13 @@ document.getElementById('encryptBtn').addEventListener('click', async() => {
     const password = passwordInput.value;
     const mode = modeSelect.value;
     const plaintext = editorBox.value;
-
     const ciphertext = await encrypt(password, plaintext);
 
     if(mode == "BASE64"){
         editorBox.value = bytesToBase64(ciphertext);
+    }else if(mode == "EMOJI"){
+        editorBox.value = bytesToEmoji(ciphertext);
     }
-    //TODO: implement EMOJI encoding
 });
 
 // Decrypt button click handler
@@ -44,9 +44,10 @@ document.getElementById('decryptBtn').addEventListener('click', async() => {
 
     if(mode == "BASE64"){
         ciphertext = base64ToBytes(encodedCiphertext);
+    }else if(mode == "EMOJI"){
+        ciphertext = emojiToBytes(encodedCiphertext);
     }
-    //TODO: implement EMOJI encoding
-
+    
     editorBox.value = await decrypt(password,ciphertext);
 });
 

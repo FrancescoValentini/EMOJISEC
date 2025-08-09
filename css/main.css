@@ -55,6 +55,7 @@ textarea {
 textarea {
     resize: vertical !important;
     min-height: var(--textarea-min-height) !important;
+    font-family: monospace;
 }
 
 /* Button Styles */

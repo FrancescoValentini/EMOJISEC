@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/crypto.js"></script> 
     <script src="js/encodings.js"></script> 
+    <script src="js/emoji-encoding.js"></script> 
 </head>
 <body>
     <div class="container">
@@ -55,7 +56,37 @@
                 <button class="btn btn-outline-info" id="copyBtn">📋 Copy</button>
             </div>
         </div>
+
+        
     </div>
+    <!-- FOOTER -->
+    <footer class="text-center mt-4">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#infoModal">Info & Credits</a>
+    </footer>
+
+    <!-- INFO MODAL -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Info & Credits</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    EMOJISEC is a web application that allows you to encrypt text using the AES-256-GCM algorithm.<br /><br />
+                    The ciphertext can be encoded in standard Base64 or using a custom encoding where each byte (0–255) is mapped to an emoji.
+                    <br /><br />
+                    The 256-bit key is derived from the password provided by the user via PBKDF2.
+                    <br /><br />
+                    <b>Author: Francesco Valentini</b><br /><br />
+                    <a href="https://github.com/FrancescoValentini/EMOJISEC">EMOJISEC - GitHub</a>
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
