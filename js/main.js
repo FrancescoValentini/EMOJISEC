@@ -28,6 +28,13 @@
   }
 })();
 
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js')
+    .then(() => console.log('Registered service worker!'))
+    .catch(err => console.error('Service Worker failure:', err));
+}
+
 
 
 const modeSelect = document.getElementById('modeSelect');
