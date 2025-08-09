@@ -22,33 +22,69 @@ togglePassword.addEventListener('click', () => {
  * BUTTON EVENT HANDLERS
  */
 // Encrypt button click handler
-document.getElementById('encryptBtn').addEventListener('click', async() => {
+document.getElementById('encryptBtn').addEventListener('click', async () => {
     const password = passwordInput.value;
     const mode = modeSelect.value;
     const plaintext = editorBox.value;
-    const ciphertext = await encrypt(password, plaintext);
 
-    if(mode == "BASE64"){
-        editorBox.value = bytesToBase64(ciphertext);
-    }else if(mode == "EMOJI"){
-        editorBox.value = bytesToEmoji(ciphertext);
+    if (checkInput()) {
+        try {
+            const ciphertext = await encrypt(password, plaintext);
+
+            if (mode === "BASE64") {
+                editorBox.value = bytesToBase64(ciphertext);
+            } else if (mode === "EMOJI") {
+                editorBox.value = bytesToEmoji(ciphertext);
+            }
+        } catch (error) {
+            showErrorModal("Encryption Error", error.message || String(error));
+        }
     }
 });
 
 // Decrypt button click handler
-document.getElementById('decryptBtn').addEventListener('click', async() => {
+document.getElementById('decryptBtn').addEventListener('click', async () => {
     const password = passwordInput.value;
     const mode = modeSelect.value;
     const encodedCiphertext = editorBox.value;
-    var ciphertext;
+    let ciphertext;
 
-    if(mode == "BASE64"){
-        ciphertext = base64ToBytes(encodedCiphertext);
-    }else if(mode == "EMOJI"){
-        ciphertext = emojiToBytes(encodedCiphertext);
+    if (checkInput()) {
+        try {
+            if (mode === "BASE64") {
+                ciphertext = base64ToBytes(encodedCiphertext);
+            } else if (mode === "EMOJI") {
+                ciphertext = emojiToBytes(encodedCiphertext);
+            }
+
+            editorBox.value = await decrypt(password, ciphertext);
+        } catch (error) {
+            showErrorModal("Decryption Error", error.message || String(error));
+        }
     }
-    
-    editorBox.value = await decrypt(password,ciphertext);
+});
+
+
+// Decrypt button click handler
+document.getElementById('decryptBtn').addEventListener('click', async () => {
+    const password = passwordInput.value;
+    const mode = modeSelect.value;
+    const encodedCiphertext = editorBox.value;
+    let ciphertext;
+
+    if (checkInput()) {
+        try {
+            if (mode === "BASE64") {
+                ciphertext = base64ToBytes(encodedCiphertext);
+            } else if (mode === "EMOJI") {
+                ciphertext = emojiToBytes(encodedCiphertext);
+            }
+
+            editorBox.value = await decrypt(password, ciphertext);
+        } catch (error) {
+            showErrorModal("Decryption Error", error.message || String(error));
+        }
+    }
 });
 
 // Copy button click handler
@@ -57,6 +93,17 @@ document.getElementById('copyBtn').addEventListener('click', () => {
     editorBox.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(editorBox.value);
 });
+
+function checkInput(){
+    const password = passwordInput.value;
+    const text = editorBox.value;
+
+    if(password == "" || text == ""){
+        showErrorModal("Fields Error!","The password and text fields must be filled!");
+        return false;
+    }
+    return true;
+}
 
 /**
     Shows a Bootstrap error modal with the given title and body content.
