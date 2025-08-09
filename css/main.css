@@ -17,7 +17,7 @@
     --btn-margin:           0.5rem;
 
     /* Sizing Variables */
-    --textarea-min-height:  400px;
+    --textarea-min-height:  350px;
     --icon-size:            1.25rem;
     --border-radius:        12px;
     --shadow-blur:          10px;
@@ -56,6 +56,8 @@ textarea {
     resize: vertical !important;
     min-height: var(--textarea-min-height) !important;
     font-family: monospace;
+    font-size: var(--normal-font-size) !important;
+    box-shadow: 0 0 var(--shadow-blur) var(--shadow-color);
 }
 
 /* Button Styles */
@@ -63,10 +65,12 @@ textarea {
 .btn-outline-warning {
     width: 100% !important;
     font-size: var(--normal-font-size);
+    box-shadow: 0 0 var(--shadow-blur) var(--shadow-color);
 }
 
 .btn-outline-info {
     font-size: var(--normal-font-size);
+    box-shadow: 0 0 var(--shadow-blur) var(--shadow-color);
 }
 
 .btn-group>.btn {
@@ -95,12 +99,14 @@ label {
     display: flex;
     align-items: center;
     font-size: var(--normal-font-size);
+    
 }
 
 .input-group-lg .btn i {
     font-size: var(--icon-size);
     font-size: var(--normal-font-size);
 }
+
 
 /*
     ============================
