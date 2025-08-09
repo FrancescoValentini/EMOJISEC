@@ -1,8 +1,38 @@
 
+(function checkCryptoSupport() {
+  const isSecureContext = window.isSecureContext;
+  const hasCrypto = !!window.crypto;
+  const hasSubtle = hasCrypto && typeof window.crypto.subtle !== 'undefined';
+
+  if (!isSecureContext) {
+    showErrorModal(
+      '⚠️ Secure Connection Required',
+      'This feature needs a secure environment to work. The Web Crypto API is disabled ' +
+      'because this page is loaded over an insecure connection (HTTP).<br><br>' +
+      '<strong>How to fix this:</strong><br>' +
+      '• Open this page using <strong>https://</strong> instead of http://<br>' +
+      '• Or run it from <strong>localhost</strong> on your computer<br>' +
+      '• Or download the page as an <strong>.html</strong> file and open it directly in your browser<br><br>' +
+      'Most browsers block cryptographic functions on insecure pages to protect your privacy and security.'
+    );
+    return;
+  }
+
+  if (!hasCrypto || !hasSubtle) {
+    showErrorModal(
+      '⚠️ Web Crypto API Unavailable',
+      'Your browser does not support the required Web Crypto API features. ' +
+      'Please update to the latest version of Chrome, Firefox, Safari, or Edge.'
+    );
+    return;
+  }
+})();
+
+
+
 const modeSelect = document.getElementById('modeSelect');
 const editorBox = document.getElementById('editorBox');
 const passwordInput = document.getElementById('passwordInput');
-showErrorModal("Test Error","This is a test error for the new error modal");
 // Get the password toggle button and its icon
 const togglePassword = document.getElementById('togglePassword');
 const icon = togglePassword.querySelector('i');
@@ -37,7 +67,7 @@ document.getElementById('encryptBtn').addEventListener('click', async () => {
                 editorBox.value = bytesToEmoji(ciphertext);
             }
         } catch (error) {
-            showErrorModal("Encryption Error", error.message || String(error));
+            showErrorModal("⚠️ Encryption Error", error.message || String(error));
         }
     }
 });
@@ -59,33 +89,11 @@ document.getElementById('decryptBtn').addEventListener('click', async () => {
 
             editorBox.value = await decrypt(password, ciphertext);
         } catch (error) {
-            showErrorModal("Decryption Error", error.message || String(error));
+            showErrorModal("⚠️ Decryption Error", error.message || String(error));
         }
     }
 });
 
-
-// Decrypt button click handler
-document.getElementById('decryptBtn').addEventListener('click', async () => {
-    const password = passwordInput.value;
-    const mode = modeSelect.value;
-    const encodedCiphertext = editorBox.value;
-    let ciphertext;
-
-    if (checkInput()) {
-        try {
-            if (mode === "BASE64") {
-                ciphertext = base64ToBytes(encodedCiphertext);
-            } else if (mode === "EMOJI") {
-                ciphertext = emojiToBytes(encodedCiphertext);
-            }
-
-            editorBox.value = await decrypt(password, ciphertext);
-        } catch (error) {
-            showErrorModal("Decryption Error", error.message || String(error));
-        }
-    }
-});
 
 // Copy button click handler
 document.getElementById('copyBtn').addEventListener('click', () => {
@@ -99,7 +107,7 @@ function checkInput(){
     const text = editorBox.value;
 
     if(password == "" || text == ""){
-        showErrorModal("Fields Error!","The password and text fields must be filled!");
+        showErrorModal("⚠️ Fields Error!","The password and text fields must be filled!");
         return false;
     }
     return true;
