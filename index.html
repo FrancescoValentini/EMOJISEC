@@ -13,7 +13,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔐 EMOJISEC</h1>
+        <h1 class="app-title">
+            <img src="img/logo.webp" alt="Logo" class="logo">
+            EMOJISEC
+        </h1>
+
         <!-- MAIN APP -->
         <div class="card">
             <!-- PASSWORD INPUT -->
@@ -48,7 +52,7 @@
             -->
             <div class="mb-3 input-group-lg">
                 <label for="editorBox" class="form-label"></label>
-                <textarea class="form-control" id="editorBox" placeholder="The quick brown fox jumps over the lazy dog..."></textarea>
+                <textarea class="form-control" id="editorBox" placeholder="The quick brown fox jumps over the lazy dog... (write your plain/cipher text here)"></textarea>
             </div>
 
             <!-- COPY BUTTON -->
@@ -78,6 +82,8 @@
                     The ciphertext can be encoded in standard Base64 or using a custom encoding where each byte (0–255) is mapped to an emoji.
                     <br /><br />
                     The 256-bit key is derived from the password provided by the user via PBKDF2.
+                    <br /><br />
+                    All cryptographic operations are performed offline (in javascript) the password or text is never sent or saved in the cloud, the application can also be downloaded as a simple html file and used offline
                     <br /><br />
                     <b>Author: Francesco Valentini</b><br /><br />
                     <a href="https://github.com/FrancescoValentini/EMOJISEC">EMOJISEC - GitHub</a>
